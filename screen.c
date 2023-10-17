@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "font.h"
 
 unsigned char buffer[128][8];
 
@@ -65,20 +66,22 @@ void draw_rect(int x1, int y1, int x2, int y2){
 	draw_v_line(y1, y2, x2);
 }
 
+void draw_letter(int x128, int y8, char letter[8]){
+	for (int i = 0; i < 8; i++){
+		buffer[x128 + i][y8] = letter[i];
+	}
+}
+
 void main(void){
 	//unsigned char buffer[128][8];
 	memset(&buffer, 0, sizeof(buffer));
 	draw_dot(127, 63);
 	//draw_h_line(10, 20, 5);
 	//draw_v_line(40,60,20);
-	draw_rect(10,10,20,20);	
+	draw_rect(10,10,20,20);
+
+	char letter[8];
+	memcpy(&letter, font[100], sizeof(letter));
+	draw_letter(20, 3, letter);
 	print_buffer();
-	//for (int y = 0; y < 8; y++){
-	//	for (int b = 0; b < 8; b++){
-//			for(int x = 0; x < 128; x++){
-//				printf("%d", get_bit(buffer[x][y], b));
-//			}
-//			printf("\n");
-//		}
-//	}
 }
