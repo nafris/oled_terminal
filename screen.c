@@ -29,7 +29,8 @@ void draw_dot(int x128, int y64){
 }
 
 void draw_h_line(int x1, int x2, int y64){
-	//need to add fix if x2 < x1
+	if(x2 < x1) return;
+
 	int y8 = GET_Y8(y64);
 	int b8 = GET_B8(y64);
 	for(int i = x1; i <= x2; i++){
@@ -38,7 +39,8 @@ void draw_h_line(int x1, int x2, int y64){
 }
 
 void draw_v_line(int y1, int y2, int x128){
-	//need to add fix if y2 < y1
+	if(y2 < y1) return;
+
 	int y8;
 	int b8;
 	for (int i = y1; i <= y2; i++){
@@ -56,7 +58,10 @@ void draw_rect(int x1, int y1, int x2, int y2){
 }
 
 void draw_line(int x1, int y1, int x2, int y2){
+	if((x2 < x1) | (y2 < y1)) return;
+
 	int k; int y8; int b8; int y;
+
 	k = 1024 * (y2 - y1) / (x2 - x1);
 	for (int i = x1; i <= x2; i++){
 		y = (i - x1) * k / 1024 + y1;
