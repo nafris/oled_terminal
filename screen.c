@@ -90,7 +90,7 @@ void write_text(char text[16]){
 }
 
 void clear_buffer(void){
-	memset(&buffer, 0, sizeof(buffer);
+	memset(&buffer, 0, sizeof(buffer));
 }
 
 void main(void){
@@ -111,7 +111,7 @@ void main(void){
 	//write_text("  are");
 	//cursorY++;
 	//cursorX = 0;
-	//write_text("the GOAT");
-	draw_line(1, 1, 10, 10);
+	//write_text("text");
+	draw_line(1, 1, 100, 10);
 	print_buffer();
 }
