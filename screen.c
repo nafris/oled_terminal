@@ -4,7 +4,7 @@
 
 #define GET_Y8(y) (y / 8)
 #define GET_B8(y) (y % 8)
-#define GET_BIT(data, b) ((data >> b) % 2)
+#define GET_BIT(data, b) ((data >> b) & 1)
 
 unsigned char buffer[128][8];
 int cursorX = 0;
