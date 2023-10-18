@@ -24,11 +24,7 @@ void print_buffer(void){
                 for (int b = 0; b < 8; b++){
                         for(int x = 0; x < 128; x++){
                                 //printf("%d", get_bit(buffer[x][y], b));
-				if(get_bit(buffer[x][y], b)){
-					 printf("*");
-				}else{
-					printf(" ");
-				}
+				printf("%c", get_bit(buffer[x][y], b) ? '%' :  ' ');
                         }
                         printf("\n");
                 }
@@ -69,6 +65,17 @@ void draw_rect(int x1, int y1, int x2, int y2){
 	draw_v_line(y1, y2, x2);
 }
 
+void draw_line(int x1, int y1, int x2, int y2){
+	int k; int y8; int b8; int y;
+	k = 1024 * (y2 - y1) / (x2 - x1);
+	for (int i = x1; i <= x2; i++){
+		y = (i - x1) * k / 1024 + y1;
+		y8 = get_y8(y);
+		b8 = get_b8(y);
+		buffer[i][y8] |= 1 << b8;
+	}
+}
+
 void draw_letter(char letter[8]){
 	for (int i = 0; i < 8; i++){
 		buffer[cursorX * 8 + i][cursorY] = letter[i];
@@ -82,26 +89,29 @@ void write_text(char text[16]){
 	}
 }
 
+void clear_buffer(void){
+	memset(&buffer, 0, sizeof(buffer);
+}
+
 void main(void){
-	//unsigned char buffer[128][8];
-	memset(&buffer, 0, sizeof(buffer));
 	//draw_dot(127, 63);
 	//draw_h_line(10, 20, 5);
 	//draw_v_line(40,60,20);
 	//draw_rect(10,10,20,20);
 
-	char letter[8];
+	//char letter[8];
 	//memcpy(&letter, font[100], sizeof(letter));
 	//draw_letter(letter);
 	//memcpy(&letter, font[105], sizeof(letter));
 	//draw_letter(letter);
 	//print_buffer();
-	write_text("Chemtrails");
-	cursorY++;
-	cursorX = 0;
-	write_text("  are");
-	cursorY++;
-	cursorX = 0;
-	write_text("the GOAT");
+	//write_text("Chemtrails");
+	//cursorY++;
+	//cursorX = 0;
+	//write_text("  are");
+	//cursorY++;
+	//cursorX = 0;
+	//write_text("the GOAT");
+	draw_line(1, 1, 10, 10);
 	print_buffer();
 }
